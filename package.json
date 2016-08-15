@@ -1,0 +1,19 @@
+{
+  "name": "emailandanswerserver",
+  "version": "1.0.0",
+  "description": "a server to store emails and answers",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "emails",
+    "answers",
+    "iottechday"
+  ],
+  "author": "Axel Scheele, Hiltsje Smilde",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
