@@ -28,23 +28,25 @@ var insertDocument = function(db, input, callback){
         callback();
     })
 }
-
+// answers still need ID to match with correct anwer
 app.get('/api/questions/getByPlayer', function(req,res){
-    Questions.find({}, '', function(err, questions){
+    var url = 'mongodb://localhost:27017/iotdb/questions';
+    mongoose.connect(url);
+    Questions.find({},{
+                    "answers.correct": 0,
+                    "category":0
+                }, function(err, questions){
+        console.log("hoi")
         if(err){
             console.log(err);
+            res.status(404).json({error: "fout"})
         } else{
-            var questions1 = [
-                {
-                    _id: a121d12e1,
-                    questionBody: "tralalalala",
-                    answers: [{_id: ae112, answerBody: "aaaa"}]
-                }
-            ];
-            res.json({questions: questions1});
-            console.log('retrieved list of questions', questions1.length);
+            
+            res.status(200).json({questions: questions});
         }
-    })
+        mongoose.connection.close()
+    }) 
+    return res;
 });
 
 app.get('/test', function(req,res){
