@@ -49,6 +49,22 @@ app.get('/api/questions/getByPlayer', function(req,res){
     return res;
 });
 
+app.get('/api/questions/getByAdmin', function(req,res){
+    var url = 'mongodb://localhost:27017/iotdb/questions';
+    mongoose.connect(url);
+    Questions.find({}, function(err, questions){
+        if(err){
+            console.log(err);
+            res.status(404).json({error: "fout"})
+        } else{
+
+            res.status(200).json({questions: questions});
+        }
+        mongoose.connection.close()
+    })
+    return res;
+});
+
 app.get('/test', function(req,res){
     res.json({message: 'yaaayyy'});
 });
